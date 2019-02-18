@@ -1,0 +1,44 @@
+.main_navigation{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3.5rem;
+    background: #99ff3b;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.NavigationLogo h1{
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.NavigationItems{
+    margin: 1.5rem;
+}
+
+.NavigationItems ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.NavigationItems li{
+    margin: 0 1rem;
+}
+.NavigationItems a{
+    text-decoration: none;
+    text-decoration-color: cornflowerblue;
+}
+
+
+
+.NavigationItems a:hover,
+.NavigationItems a:active,
+.NavigationItems a.active{
+    text-decoration: none;
+    color: #8b1b19;
+}
