@@ -1,32 +1,41 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import './Navigation.css';
+import AuthContext from '../../Context/Auth';
 const navigation= ()=>{
     return (
-       <header className="main_navigation">
-           <div className="NavigationLogo">
-                <h1>
-                    Eventify
-                </h1>
-           </div>
-           <div className="NavigationItems">
-               <ul>
-                   <li>
-                       <NavLink to="/">Home</NavLink>
-                   </li>
-                   <li>
-                       <NavLink to="/auth">Auth</NavLink>
-                   </li>
-                   <li>
-                       <NavLink to="/events">Events</NavLink>
-                   </li>
-                   <li>
-                       <NavLink to="/bookings">Bookings</NavLink>
-                   </li>
-               </ul>
+        <AuthContext.Consumer>
+            {
+                (context)=>{
+                    return <header className="main_navigation">
+                        <div className="NavigationLogo">
+                            <h1>
+                                Eventify
+                            </h1>
+                        </div>
+                        <div className="NavigationItems">
+                            <ul>
+                                {
+                                    !context.token? <li>
+                                        <NavLink to="/auth">Auth</NavLink>
+                                    </li>:null
+                                }
+                                <li>
+                                    <NavLink to="/events">Events</NavLink>
+                                </li>
+                                {
+                                    context.token?<li>
+                                        <NavLink to="/bookings">Bookings</NavLink>
+                                    </li>:null
+                                }
 
-           </div>
-       </header>
+                            </ul>
+
+                        </div>
+                    </header>
+                }
+            }
+        </AuthContext.Consumer>
     )
 };
 
