@@ -26,12 +26,9 @@ class Auth extends Component {
         })
     }
     submitHandler=(e)=>{
-        console.log('here');
         e.preventDefault();
       const email= this.emailEl.current.value;
         const password= this.passwordEl.current.value;
-        const firstName=this.firstNameEl.current.value;
-        const lastName=this.lastNameEl.current.value;
         if(email.trim().length===0 || password.trim().length===0){
             return;
         }
@@ -48,6 +45,8 @@ class Auth extends Component {
             `
         };
         if(!this.state.isLogin){
+            const firstName=this.firstNameEl.current.value;
+            const lastName=this.lastNameEl.current.value;
             reqBody={
                 query:`
             mutation {
@@ -74,7 +73,7 @@ class Auth extends Component {
                       this.context.login(data.data.login.token,data.data.login.userId,data.data.login.tokenExpiration,data.data.login.firstName);
                   }
                })
-       }).catch((err)=>console.log(err))
+       }).catch((err)=>console.log(err));
     };
     render() {
         return (
