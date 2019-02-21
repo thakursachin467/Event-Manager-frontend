@@ -28,9 +28,3 @@ width: 25rem;
     margin-right:  1rem;
     box-shadow: 1px 1px 5px black;
 }
-.formAction button:hover,
-.formAction button:hover{
-    cursor: pointer;
-    background-color: #bd7d2b;
-    background: #bd7d2b;
-}

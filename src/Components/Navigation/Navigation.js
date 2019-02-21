@@ -24,9 +24,16 @@ const navigation= ()=>{
                                     <NavLink to="/events">Events</NavLink>
                                 </li>
                                 {
-                                    context.token?<li>
+                                    context.token?(
+                                        <React.Fragment>
+                                        <li>
                                         <NavLink to="/bookings">Bookings</NavLink>
-                                    </li>:null
+                                    </li>
+                                            <li >
+                                                <NavLink to="/logout" onClick={context.logout}>Logout</NavLink>
+                                            </li>
+                                        </React.Fragment>
+                                    ):null
                                 }
 
                             </ul>

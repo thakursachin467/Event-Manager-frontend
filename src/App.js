@@ -28,7 +28,7 @@ class App extends Component {
           <Switch>
               <main className="main_content">
                   {
-                      !this.state.token? <Redirect from='/' to='/auth' exact/>:null
+                      !this.state.token? <Redirect to='/auth' exact/>:null
                   }
                   {
                       this.state.token? <Redirect from='/' to='/events' exact/>:null

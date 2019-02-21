@@ -24,6 +24,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    align-items: center;
 }
 
 .NavigationItems li{
@@ -31,6 +32,13 @@
 }
 .NavigationItems a{
     text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    font: inherit;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    margin: 0;
     text-decoration-color: cornflowerblue;
 }
 
@@ -40,5 +48,7 @@
 .NavigationItems a:active,
 .NavigationItems a.active{
     text-decoration: none;
+    background: #57fffa;
     color: #8b1b19;
+    border-radius: 5px;
 }

@@ -4,4 +4,24 @@ body {
   font-family: sans-serif;
 }
 
+.btn{
+  background: #536eff;
+  font: inherit ;
+  border: 1px solid #536eff;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  margin-right: 1rem;
+  color:white;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px black;
+}
+
+.formAction button:hover,
+.formAction button:hover
+.btn:active{
+  cursor: pointer;
+  background-color: #bd7d2b;
+  background: #bd7d2b;
+}
+
 
