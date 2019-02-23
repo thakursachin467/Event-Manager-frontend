@@ -65,6 +65,7 @@ class Auth extends Component {
            }
        }).then((res)=>{
            if(res.status!==200 ){
+               console.log(res);
                throw new  Error('Something went wrong');
            }
            return res.json()

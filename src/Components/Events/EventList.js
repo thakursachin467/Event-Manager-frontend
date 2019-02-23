@@ -6,7 +6,16 @@ import EventItem from './EventItem/EventItem';
 const EventList =(props)=> {
 const events= props.events.map(event=>{
     const date= new Date(event.date).toDateString();
-    return <EventItem key={event._id} eventId={event._id} creator={event.creator._id} eventTitle={event.title} eventDate={date} price={event.price} userId={props.authUserId}/>
+    return <EventItem
+        key={event._id}
+        eventId={event._id}
+        creator={event.creator._id}
+        eventTitle={event.title}
+        eventDate={date}
+        price={event.price}
+        userId={props.authUserId}
+        detailsOpen={props.detailsOpen}
+    />
 });
    return(
        <div className="List">

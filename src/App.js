@@ -11,7 +11,8 @@ class App extends Component {
     state={
        token:null,
         userId:null,
-        firstName:null
+        firstName:null,
+        errors:null
     };
     login=(token,userId,tokenExpiration,firstName)=>{
         this.setState({token:token,userId:userId,firstName:firstName})
@@ -23,7 +24,7 @@ class App extends Component {
     return (
       <BrowserRouter className="App">
           <React.Fragment>
-              <AuthContext.Provider value={{token:this.state.token,userId:this.state.userId,login:this.login,logout:this.logout}}>
+              <AuthContext.Provider value={{token:this.state.token,userId:this.state.userId,login:this.login,logout:this.logout,errors:this.state.errors}}>
           <NavBar/>
           <Switch>
               <main className="main_content">

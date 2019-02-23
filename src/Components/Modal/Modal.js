@@ -2,12 +2,16 @@ import React from 'react';
 import {Button, Input, TextArea,Form,Modal} from "semantic-ui-react";
 
 const Modals =(props)=>{
+    const {open,controlModal}=props;
         return(
-            <Modal trigger={
-                <Button style={{margin:"1.5rem 1rem", background:"orange", borderRadius:"3px "}}>Create Event</Button>
-
-            }>
-                <Modal.Header>Enter Event Details</Modal.Header>
+            <Modal
+                open={open}
+                onOpen={controlModal}
+                onClose={controlModal}
+                size={props.size}
+                basic={props.basic}
+            >
+                <Modal.Header>{props.header}</Modal.Header>
                 <Modal.Content>
                     {props.children}
                 </Modal.Content>
