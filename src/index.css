@@ -16,6 +16,10 @@ body {
   box-shadow: 1px 1px 5px black;
 }
 
+.booking{
+  margin-top: 5rem;
+}
+
 .formAction button:hover,
 .formAction button:hover
 .btn:active{

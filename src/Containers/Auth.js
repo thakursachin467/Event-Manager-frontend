@@ -78,6 +78,7 @@ class Auth extends Component {
     };
     render() {
         return (
+            <div>
             <Form className="auth_form" onSubmit={this.submitHandler} >
                 <div className="form">
                     {
@@ -111,6 +112,7 @@ class Auth extends Component {
                 <Button  type='submit'>{!this.state.isLogin?"signup":"Login"}</Button>
                 </div>
             </Form>
+            </div>
         );
     }
 }

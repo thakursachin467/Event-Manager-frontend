@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/Auth";
-import {Loader} from "semantic-ui-react";
+import {Loader, Card, Icon, Button} from "semantic-ui-react";
 
 class Booking extends Component {
     static contextType= AuthContext;
@@ -15,6 +15,45 @@ class Booking extends Component {
         this.fetchBookings();
     }
 
+    cancelBooking=(bookingId)=>{
+        console.log(bookingId);
+        this.setState(prevState=>{
+            return {isLoading: !prevState.isLoading}
+        });
+        const requestBody={
+            query:`
+           mutation{
+  cancelBooking(bookingId:"${bookingId}"){
+    title
+  }
+}`};
+        fetch('http://localhost:5001/graphql',{
+            method:"POST",
+            body:JSON.stringify(requestBody),
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`token ${this.context.token}`
+            }
+        }).then((res)=>{
+            this.setState(prevState=>{
+                return {isLoading: !prevState.isLoading}
+            });
+            if(res.status!==200 ){
+                throw new  Error('Something went wrong');
+            }
+            return res.json()
+                .then((data)=>{
+                    console.log(data);
+                    this.fetchBookings();
+                })
+        }).catch((err)=>{
+            this.setState(prevState=>{
+                return {isLoading: !prevState.isLoading}
+            });
+            console.log(err)
+        });
+    };
+
     fetchBookings=()=>{
         this.setState(prevState=>{
             return {isLoading: !prevState.isLoading}
@@ -23,6 +62,8 @@ class Booking extends Component {
             query:`
             query{
   bookings{
+  _id
+  cancel
     event{
       description
       title
@@ -47,7 +88,7 @@ class Booking extends Component {
             }
             return res.json()
                 .then((data)=>{
-                    console.log(data.bookings);
+                    console.log(data);
                     const bookings= data.data.bookings;
                     this.setState({bookings:bookings});
                 })
@@ -60,6 +101,7 @@ class Booking extends Component {
     };
 
     render() {
+
         return (
             <div>
                 {
@@ -69,7 +111,31 @@ class Booking extends Component {
                         size='big'
                         inline='centered' >
                         Loading
-                    </Loader>):null
+                    </Loader>):(
+                        <div className="booking">
+                        <Card.Group>
+                            {
+                                this.state.bookings.map((booking)=>{
+                                  return  !booking.cancel? (
+                                        <Card
+                                            fluid
+                                              color='red'
+                                              header={booking.event.title}
+                                              meta={new Date(booking.event.date).toLocaleString()}
+                                              description={booking.event.description}
+                                            extra= {(<Button
+                                                basic
+                                                color='red'
+                                                onClick={this.cancelBooking.bind(this,booking._id)}>
+                                                Cancel Booking
+                                            </Button>)}
+                                       />
+                                    ):null
+                                })
+                            }
+                        </Card.Group>
+                        </div>
+                    )
                 }
             </div>
         );
