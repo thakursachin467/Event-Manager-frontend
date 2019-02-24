@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/Auth";
-import {Loader, Card, Icon, Button} from "semantic-ui-react";
-
+import { Tab } from 'semantic-ui-react'
+import Loader from '../Components/Utils/Loader';
+import Cards from '../Components/Utils/Card';
+import Chart from '../Components/Utils/Chart';
 class Booking extends Component {
     static contextType= AuthContext;
     constructor(props){
@@ -101,42 +103,20 @@ class Booking extends Component {
     };
 
     render() {
+        const panes = [
+            { menuItem: 'All Bookings', render: () =>
+                    this.state.isLoading?( <Loader/>):(
+                        <Cards bookings={this.state.bookings} cancelBooking={this.cancelBooking} />
+                    )
+                 },
+            { menuItem: 'Charts', render: () => <Chart booking={this.state.bookings}/> },
+            //{ menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+        ];
 
         return (
             <div>
-                {
-                    this.state.isLoading?( <Loader
-                        style={{marginTop:"5rem"}}
-                        active
-                        size='big'
-                        inline='centered' >
-                        Loading
-                    </Loader>):(
-                        <div className="booking">
-                        <Card.Group>
-                            {
-                                this.state.bookings.map((booking)=>{
-                                  return  !booking.cancel? (
-                                        <Card
-                                            fluid
-                                              color='red'
-                                              header={booking.event.title}
-                                              meta={new Date(booking.event.date).toLocaleString()}
-                                              description={booking.event.description}
-                                            extra= {(<Button
-                                                basic
-                                                color='red'
-                                                onClick={this.cancelBooking.bind(this,booking._id)}>
-                                                Cancel Booking
-                                            </Button>)}
-                                       />
-                                    ):null
-                                })
-                            }
-                        </Card.Group>
-                        </div>
-                    )
-                }
+                <Tab panes={panes} />
+
             </div>
         );
     }
