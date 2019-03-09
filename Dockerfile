@@ -12,4 +12,5 @@ RUN npm run build
 # /home/event-manager-client/build <-----all the stuff we care about for production is in build folder
 
 FROM nginx
+EXPOSE 80
 COPY --from=builder /home/event-manager-client/build /usr/share/nginx/html
